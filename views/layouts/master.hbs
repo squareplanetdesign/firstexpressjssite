@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{header.description}}">
+    <title>{{header.title}}</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <header>
+        <a href="/">Home</a>
+        {{#if user}}
+        <form name="frmLogin">
+            <span>Welcome {{user.userName}}</span>
+            <button type="submit" class="btn btn-default" formaction="/logout" formmethod="post">Logout</button>
+        </form>
+        {{else}}
+        <form name="frmLogin">
+            <label>User Name:</lable>
+            <input type="text" name="txtUserName" />
+            <button type="submit" class="btn btn-default" formaction="/login" formmethod="post">Login</button>
+            {{#if error.formLogin.txtUserName}}
+                <span class="label label-danger">!</span>
+            {{/if}}
+        </form>
+        {{/if}}
+    </header>
+
+    {{#if error}}
+    <div class="alert alert-danger" role="alert">
+        {{error.message}}
+    </div>
+    {{/if}}
+
+    {{{body}}}
+  </body>
+</html>
